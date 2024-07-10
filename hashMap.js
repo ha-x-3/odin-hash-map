@@ -1,5 +1,4 @@
 export default function HashMap() {
-	/* const START_SIZE = 10; */
 	const START_SIZE = 2;
 	const LOAD_FACTOR = 0.75;
 	let bucket = new Array(START_SIZE);
@@ -17,12 +16,6 @@ export default function HashMap() {
 		return hashCode;
 	}
 
-	/**
-	 * Inserts new node into hash map. If key was reused, then override previous value. If a different key reaches a populated hashkey, insert a new node at the end of the list.
-	 * @param {*} key
-	 * @param {*} value
-	 * @returns
-	 */
 	function set(key, value) {
 		const node = createNode(key, value);
 		const hashCode = hash(key);
@@ -170,9 +163,8 @@ export default function HashMap() {
 		return currentLoad > LOAD_FACTOR;
 	}
 
-	/**
-	 * Grow bucket and rehash data
-	 */
+	
+	//Grow bucket and rehash data
 	function growBucket() {
 		const oldBucket = bucket;
 		capacity = 0;
