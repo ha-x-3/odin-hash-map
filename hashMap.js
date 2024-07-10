@@ -224,6 +224,13 @@ export default function HashMap() {
 		set,
 		values,
 	};
+
+    function validateBucketIndex(index) {
+        if (index < 0 || index >= bucket.length) {
+            throw new Error('Trying to access index out of bound');
+        }
+    }
+
 }
 
 function createNode(key, value, next = null) {
@@ -232,10 +239,4 @@ function createNode(key, value, next = null) {
 		value,
 		next,
 	};
-}
-
-function validateBucketIndex(index) {
-	if (index < 0 || index >= bucket.length) {
-		throw new Error('Trying to access index out of bound');
-	}
 }
