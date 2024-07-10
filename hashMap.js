@@ -17,8 +17,10 @@ export default function HashMap() {
 	}
 
 	function set(key, value) {
-		const node = createNode(key, value);
 		const hashCode = hash(key);
+		validateBucketIndex(hashCode);
+
+		const node = createNode(key, value);
 
 		if (!bucket[hashCode]) {
 			bucket[hashCode] = node;
@@ -49,6 +51,8 @@ export default function HashMap() {
 
 	function get(key) {
 		const hashCode = hash(key);
+		validateBucketIndex(hashCode);
+
 		const contents = bucket[hashCode];
 		let ptr = contents;
 
@@ -65,6 +69,8 @@ export default function HashMap() {
 
 	function has(key) {
 		const hashCode = hash(key);
+		validateBucketIndex(hashCode);
+
 		const linkedList = bucket[hashCode];
 		let ptr = linkedList;
 
@@ -79,6 +85,8 @@ export default function HashMap() {
 
 	function remove(key) {
 		const hashCode = hash(key);
+		validateBucketIndex(hashCode);
+
 		let linkedList = bucket[hashCode];
 
 		// Empty
@@ -224,4 +232,10 @@ function createNode(key, value, next = null) {
 		value,
 		next,
 	};
+}
+
+function validateBucketIndex(index) {
+	if (index < 0 || index >= bucket.length) {
+		throw new Error('Trying to access index out of bound');
+	}
 }
